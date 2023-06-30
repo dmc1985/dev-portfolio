@@ -29,10 +29,30 @@ const StyledContentWrapper = styled(ContentWrapper)`
     @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
       margin-bottom: 4rem;
     }
+    .wrapper {
+      display: flex;
+      height: 100%;
+      margin-bottom: 2rem;
+    }
+    .wrapper > div {
+      margin: 0 1rem;
+    }
     .greetings {
       display: flex;
       justify-content: flex-start;
       align-items: center;
+    }
+    .my-photo-wrapper {
+      flex: 50%;
+      // TODO: improve responsiveness of photo
+    }
+    .my-photo {
+      margin-left: 0.75rem;
+      flex-grow: 1;
+      @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+        margin-left: 1rem;
+        flex-grow: 1;
+      }
     }
     .emoji {
       margin-left: 0.75rem;
@@ -109,33 +129,48 @@ const Hero = ({ content }) => {
           animate={gControls}
           data-testid="animated-heading"
         >
-          <h1 className="title">
-            <div className="greetings">
-              {frontmatter.greetings}
-              <motion.div
-                animate={eControls}
-                style={{ originX: 0.7, originY: 0.7 }}
-              >
-                <Img
-                  className="emoji"
-                  fluid={frontmatter.icon.childImageSharp.fluid}
-                />
-              </motion.div>
+          <div className="wrapper">
+            <div className="my-photo-wrapper">
+              <Img
+                className="my-photo"
+                fluid={frontmatter.photo.childImageSharp.fluid}
+              />
             </div>
-            {frontmatter.title}
-          </h1>
-          <h2 className="subtitle">
-            {frontmatter.subtitlePrefix}{" "}
-            <AnimatedUnderlining animate={uControls} big>
-              {frontmatter.subtitle}
-            </AnimatedUnderlining>
-          </h2>
-          <div className="description">
-            <MDXRenderer>{body}</MDXRenderer>
+            <div>
+              <h1 className="title">
+                <div className="greetings">
+                  {frontmatter.greetings}
+                  <motion.div
+                    animate={eControls}
+                    style={{ originX: 0.7, originY: 0.7 }}
+                  >
+                    <Img
+                      className="emoji"
+                      fluid={frontmatter.icon.childImageSharp.fluid}
+                    />
+                  </motion.div>
+                </div>
+                {frontmatter.title}
+              </h1>
+              <h2 className="subtitle">
+                {frontmatter.subtitlePrefix}{" "}
+                <AnimatedUnderlining animate={uControls} big>
+                  {frontmatter.subtitle}
+                </AnimatedUnderlining>
+              </h2>
+              <div className="description">
+                <MDXRenderer>{body}</MDXRenderer>
+              </div>
+            </div>
           </div>
         </motion.div>
         <motion.div initial={{ opacity: 0, x: 20 }} animate={sControls}>
-          <Social fontSize=".95rem" padding=".3rem 1.25rem" width="auto" />
+          <Social
+            fontSize=".95rem"
+            padding=".3rem 1.25rem"
+            width="auto"
+            withIcon
+          />
         </motion.div>
       </StyledContentWrapper>
     </StyledSection>

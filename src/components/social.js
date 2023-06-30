@@ -11,8 +11,8 @@ const StyledSocialWrapper = styled.div`
   display: grid;
   /* Calculate columns, depending on how many profiles there are */
   grid-template-columns: repeat(${({ itemCount }) => itemCount + 1}, auto);
-  justify-content: start;
-  justify-items: start;
+  justify-content: center;
+  justify-items: center;
 
   margin-left: -2.5rem;
   margin-right: -2.5rem;
