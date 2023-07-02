@@ -33,7 +33,7 @@ The starter has predefined sections as well as a template that you can use to cr
 **The predefined sections are:**
 
 1. About me
-2. Interests/Skills
+2. Skills/Skills
 3. Projects
 4. Contact me
 5. Medium articles

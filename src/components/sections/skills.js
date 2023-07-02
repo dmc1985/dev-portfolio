@@ -42,7 +42,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 
 const StyledInterests = styled.div`
   display: grid;
-  /* Calculate how many columns are needed, depending on interests count */
+  /* Calculate how many columns are needed, depending on skills count */
   grid-template-columns: repeat(
     ${({ itemCount }) => Math.ceil(itemCount / 2)},
     15.625rem
@@ -94,7 +94,7 @@ const StyledInterests = styled.div`
     }
   }
 
-  .interest {
+  .skill {
     width: 15.625rem;
     height: 3rem;
     display: flex;
@@ -110,11 +110,11 @@ const StyledInterests = styled.div`
   }
 `
 
-const Interests = ({ content }) => {
+const Skills = ({ content }) => {
   const { exports, frontmatter } = content[0].node
-  const { shownItems, interests } = exports
+  const { shownItems, skills } = exports
 
-  const [shownInterests, setShownInterests] = useState(shownItems)
+  const [shownSkills, setShownSkills] = useState(shownItems)
 
   const ref = useRef()
   const onScreen = useOnScreen(ref)
@@ -123,19 +123,19 @@ const Interests = ({ content }) => {
   const bControls = useAnimation()
 
   useEffect(() => {
-    // If mobile or tablet, show all interests initially
-    // Otherwise interests.mdx will determine how many interests are shown
+    // If mobile or tablet, show all skills initially
+    // Otherwise skills.mdx will determine how many skills are shown
     // (isSSR) is used to prevent error during gatsby build
     if (!isSSR && detectMobileAndTablet(window.innerWidth)) {
-      setShownInterests(interests.length)
+      setShownSkills(skills.length)
     }
-  }, [interests])
+  }, [skills])
 
   useEffect(() => {
     const sequence = async () => {
       if (onScreen) {
         // i receives the value of the custom prop - can be used to stagger
-        // the animation of each "interest" element
+        // the animation of each "skill" element
         await iControls.start(i => ({
           opacity: 1,
           scaleY: 1,
@@ -145,18 +145,18 @@ const Interests = ({ content }) => {
       }
     }
     sequence()
-  }, [onScreen, shownInterests, iControls, bControls])
+  }, [onScreen, shownSkills, iControls, bControls])
 
-  const showMoreItems = () => setShownInterests(shownInterests + 4)
+  const showMoreItems = () => setShownSkills(shownSkills + 4)
 
   return (
-    <StyledSection id="interests">
+    <StyledSection id="skills">
       <StyledContentWrapper>
         <h3 className="section-title">{frontmatter.title}</h3>
-        <StyledInterests itemCount={interests.length} ref={ref}>
-          {interests.slice(0, shownInterests).map(({ name, icon }, key) => (
+        <StyledInterests itemCount={skills.length} ref={ref}>
+          {skills.slice(0, shownSkills).map(({ name, icon }, key) => (
             <motion.div
-              className="interest"
+              className="skill"
               key={key}
               custom={key}
               initial={{ opacity: 0, scaleY: 0 }}
@@ -165,7 +165,7 @@ const Interests = ({ content }) => {
               <Img className="icon" fixed={icon.childImageSharp.fixed} /> {name}
             </motion.div>
           ))}
-          {shownInterests < interests.length && (
+          {shownSkills < skills.length && (
             <motion.div initial={{ opacity: 0, scaleY: 0 }} animate={bControls}>
               <Button
                 onClick={() => showMoreItems()}
@@ -182,12 +182,12 @@ const Interests = ({ content }) => {
   )
 }
 
-Interests.propTypes = {
+Skills.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
         exports: PropTypes.shape({
-          interests: PropTypes.array.isRequired,
+          skills: PropTypes.array.isRequired,
           shownItems: PropTypes.number.isRequired,
         }).isRequired,
         frontmatter: PropTypes.object.isRequired,
@@ -196,4 +196,4 @@ Interests.propTypes = {
   ).isRequired,
 }
 
-export default Interests
+export default Skills
