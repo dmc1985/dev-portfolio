@@ -91,10 +91,11 @@ module.exports = {
       },
     ],
     button: {
-      useFileName: true,
-      name: "Resume",
-      fileName: "goldenpuppy.pdf", // the file has to be placed inside the static folder at the root level
-      url: "", // if useFileName=false, you can set an anchor link here and use the button for navigational purposes
+      useFileName: false,
+      name: "CV",
+      fileName: "", // the file has to be placed inside the static folder at the root level
+      url:
+        "https://drive.google.com/file/d/1dId98GN5kdex9icT0Rg3FMXDT60YJ28g/view?usp=sharing", // if useFileName=false, you can set an anchor link here and use the button for navigational purposes
     },
   },
   footerLinks: [

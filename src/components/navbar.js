@@ -74,9 +74,14 @@ const Navbar = () => {
           {button.name}
         </a>
       ) : (
-        <Link className="cta-btn" to={button.url}>
+        <a
+          className="cta-btn"
+          href={button.url}
+          target="_blank"
+          rel="noreferrer"
+        >
           {button.name}
-        </Link>
+        </a>
       )}
     </StyledNav>
   )
