@@ -69,6 +69,9 @@ const StyledSocialWrapper = styled.div`
 `
 
 const StyledSocialProfile = styled.a`
+  display: ${({ withLabel }) => (withLabel ? "initial" : "flex")};
+  justify-content: center;
+  align-items: center;
   width: ${({ width }) => (width ? width : "auto")};
   height: auto;
   background: ${({ theme }) => theme.colors.background};
@@ -96,12 +99,22 @@ const StyledSocialProfile = styled.a`
   svg {
     height: 1rem;
     width: 1rem;
-    margin-right: 0.5rem;
-    margin-bottom: -0.05rem;
+    margin-right: ${({ withLabel }) => {
+      debugger
+      return withLabel ? "0.5rem" : "0"
+    }};
+    margin-bottom: ${({ withLabel }) => (withLabel ? "-0.05rem" : "0")};
   }
 `
 
-const Social = ({ width, padding, fontSize, fontWeight, withIcon }) => {
+const Social = ({
+  width,
+  padding,
+  fontSize,
+  fontWeight,
+  withIcon,
+  withLabel,
+}) => {
   const { darkMode } = useContext(Context).state
 
   return (
@@ -118,6 +131,7 @@ const Social = ({ width, padding, fontSize, fontWeight, withIcon }) => {
             padding={padding}
             fontSize={fontSize}
             fontWeight={fontWeight}
+            withLabel={withLabel}
           >
             {withIcon ? (
               <Icon
@@ -129,7 +143,7 @@ const Social = ({ width, padding, fontSize, fontWeight, withIcon }) => {
                 }
               />
             ) : null}{" "}
-            {name}
+            {withLabel && name}
           </StyledSocialProfile>
         )
       })}
@@ -143,6 +157,7 @@ Social.propTypes = {
   fontSize: PropTypes.string,
   fontWeight: PropTypes.string,
   withIcon: PropTypes.bool,
+  withLabel: PropTypes.bool,
 }
 
 export default Social

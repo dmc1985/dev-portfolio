@@ -10,6 +10,7 @@ import ContentWrapper from "../../styles/contentWrapper"
 import Underlining from "../../styles/underlining"
 import Social from "../social"
 import { lightTheme, darkTheme } from "../../styles/theme"
+import { useDetectSmallScreen } from "../../hooks"
 
 const StyledSection = styled.section`
   width: 100%;
@@ -85,6 +86,7 @@ const AnimatedUnderlining = motion.custom(Underlining)
 const Hero = ({ content }) => {
   const { frontmatter, body } = content[0].node
   const { isIntroDone, darkMode } = useContext(Context).state
+  const isSmallScreen = useDetectSmallScreen()
 
   // Controls to orchestrate animations of greetings, emoji, social profiles, underlining
   const gControls = useAnimation()
@@ -167,9 +169,10 @@ const Hero = ({ content }) => {
         <motion.div initial={{ opacity: 0, x: 20 }} animate={sControls}>
           <Social
             fontSize=".95rem"
-            padding=".3rem 1.25rem"
+            padding="0.3rem 1.25rem"
             width="auto"
             withIcon
+            withLabel={!isSmallScreen}
           />
         </motion.div>
       </StyledContentWrapper>

@@ -10,6 +10,7 @@ import ContentWrapper from "../styles/contentWrapper"
 import Logo from "./logo"
 import Sidebar from "./sidebar"
 import Navbar from "./navbar"
+import { useDetectSmallScreen } from "../hooks"
 
 const StyledHeader = motion.custom(styled.header`
   width: 100%;
@@ -75,20 +76,7 @@ const StyledBurger = styled.button`
 const Header = () => {
   const { isIntroDone } = useContext(Context).state
   const [open, setOpen] = useState(false)
-  const [windowWidth, setWindowWidth] = useState(0)
-
-  useEffect(() => {
-    let handleWindowSizeChange
-    // if (isSSR) is necessary to prevent error during the gatsby build
-    if (!isSSR) {
-      handleWindowSizeChange = () => setWindowWidth(window.innerWidth)
-      // set initial innerWidth when component mounts
-      setWindowWidth(window.innerWidth)
-    }
-    // Add event listener to update windowWidth in state
-    window.addEventListener("resize", handleWindowSizeChange)
-    return () => window.removeEventListener("resize", handleWindowSizeChange)
-  }, [windowWidth])
+  const isSmallScreen = useDetectSmallScreen()
 
   // Required for animation - start after the splashScreen sequence is done
   const controls = useAnimation()
@@ -98,7 +86,7 @@ const Header = () => {
   }, [isIntroDone, controls])
 
   let navigation
-  if (detectMobileAndTablet(windowWidth)) {
+  if (isSmallScreen) {
     navigation = (
       <>
         <StyledBurger
