@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
+import DarkModeToggle from "react-dark-mode-toggle"
 
 import { navLinks } from "../../config"
+import Context from "../context"
 
 const StyledNav = styled.nav`
   display: none;
@@ -55,6 +57,8 @@ const StyledNav = styled.nav`
 
 const Navbar = () => {
   const { menu, button } = navLinks
+  const { state, setState } = useContext(Context)
+
   return (
     <StyledNav>
       {menu.map(({ name, url }, key) => {
@@ -83,6 +87,12 @@ const Navbar = () => {
           {button.name}
         </a>
       )}
+      <DarkModeToggle
+        checked={state.darkMode}
+        onChange={isChecked => {
+          setState(state => ({ ...state, darkMode: isChecked }))
+        }}
+      />
     </StyledNav>
   )
 }
