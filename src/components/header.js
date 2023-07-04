@@ -10,7 +10,8 @@ import ContentWrapper from "../styles/contentWrapper"
 import Logo from "./logo"
 import Sidebar from "./sidebar"
 import Navbar from "./navbar"
-import { useDetectSmallScreen } from "../hooks"
+import { useDarkMode, useDetectSmallScreen } from "../hooks"
+import DarkModeToggle from "react-dark-mode-toggle"
 
 const StyledHeader = motion.custom(styled.header`
   width: 100%;
@@ -77,6 +78,7 @@ const Header = () => {
   const { isIntroDone } = useContext(Context).state
   const [open, setOpen] = useState(false)
   const isSmallScreen = useDetectSmallScreen()
+  const { darkModeEnabled, toggleDarkMode } = useDarkMode()
 
   // Required for animation - start after the splashScreen sequence is done
   const controls = useAnimation()
@@ -89,6 +91,7 @@ const Header = () => {
   if (isSmallScreen) {
     navigation = (
       <>
+        <DarkModeToggle checked={darkModeEnabled} onChange={toggleDarkMode} />
         <StyledBurger
           aria-controls="sidebar"
           open={open}
@@ -102,7 +105,12 @@ const Header = () => {
       </>
     )
   } else {
-    navigation = <Navbar />
+    navigation = (
+      <Navbar
+        darkModeEnabled={darkModeEnabled}
+        toggleDarkMode={toggleDarkMode}
+      />
+    )
   }
 
   return (

@@ -6,6 +6,7 @@ import DarkModeToggle from "react-dark-mode-toggle"
 import { navLinks } from "../../config"
 import Context from "../context"
 import { useDarkMode } from "../hooks"
+import PropTypes from "prop-types"
 
 const StyledNav = styled.nav`
   display: none;
@@ -56,9 +57,8 @@ const StyledNav = styled.nav`
   }
 `
 
-const Navbar = () => {
+const Navbar = ({ darkModeEnabled, toggleDarkMode }) => {
   const { menu, button } = navLinks
-  const { darkModeEnabled, toggleDarkMode } = useDarkMode()
 
   return (
     <StyledNav>
@@ -91,6 +91,11 @@ const Navbar = () => {
       <DarkModeToggle checked={darkModeEnabled} onChange={toggleDarkMode} />
     </StyledNav>
   )
+}
+
+Navbar.propTypes = {
+  darkModeEnabled: PropTypes.bool.isRequired,
+  toggleDarkMode: PropTypes.func.isRequired,
 }
 
 export default Navbar
