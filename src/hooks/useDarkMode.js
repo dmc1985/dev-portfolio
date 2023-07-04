@@ -37,7 +37,14 @@ const useDarkMode = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return state.darkMode
+  return {
+    darkModeEnabled: state.darkMode,
+    toggleDarkMode: () =>
+      setState(state => ({
+        ...state,
+        darkMode: !state.darkMode,
+      })),
+  }
 }
 
 export default useDarkMode
