@@ -62,7 +62,8 @@ const Privacy = ({ data }) => {
         <StyledSection id={title}>
           <StyledContentWrapper>
             <h1 data-testid="heading">{title}</h1>
-            <MDXRenderer>{body}</MDXRenderer>
+            {/*TODO: Must fix MDX*/}
+            {body}
           </StyledContentWrapper>
         </StyledSection>
       </Layout>
@@ -89,7 +90,9 @@ export default Privacy
 
 export const pageQuery = graphql`
   {
-    privacy: allMdx(filter: { fileAbsolutePath: { regex: "/privacy/" } }) {
+    privacy: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/privacy/" } } }
+    ) {
       edges {
         node {
           body

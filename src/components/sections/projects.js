@@ -289,7 +289,8 @@ const Projects = ({ content }) => {
                       {frontmatter.emoji} {frontmatter.category}
                     </div>
                     <div className="title">{frontmatter.title}</div>
-                    <MDXRenderer>{body}</MDXRenderer>
+                    {/*TODO: Must fix MDX*/}
+                    {body}
                     <div className="tags">
                       {frontmatter.tags.map(tag => (
                         <Underlining key={tag} highlight>

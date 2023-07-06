@@ -110,9 +110,9 @@ const StyledInterests = styled.div`
   }
 `
 
-const Skills = ({ content }) => {
-  const { exports, frontmatter } = content[0].node
-  const { shownItems, skills } = exports
+const Skills = ({ content, skills }) => {
+  const { frontmatter } = content[0].node
+  const { shownItems } = frontmatter
 
   const [shownSkills, setShownSkills] = useState(shownItems)
 

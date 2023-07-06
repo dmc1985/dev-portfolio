@@ -99,10 +99,7 @@ const StyledSocialProfile = styled.a`
   svg {
     height: 1rem;
     width: 1rem;
-    margin-right: ${({ withLabel }) => {
-      debugger
-      return withLabel ? "0.5rem" : "0"
-    }};
+    margin-right: ${({ withLabel }) => (withLabel ? "0.5rem" : "0")};
     margin-bottom: ${({ withLabel }) => (withLabel ? "-0.05rem" : "0")};
   }
 `

@@ -62,7 +62,8 @@ const Imprint = ({ data }) => {
         <StyledSection id={title}>
           <StyledContentWrapper>
             <h1 data-testid="heading">{title}</h1>
-            <MDXRenderer>{body}</MDXRenderer>
+            {/*TODO: Must fix MDX*/}
+            {body}
           </StyledContentWrapper>
         </StyledSection>
       </Layout>
@@ -89,7 +90,9 @@ export default Imprint
 
 export const pageQuery = graphql`
   {
-    imprint: allMdx(filter: { fileAbsolutePath: { regex: "/imprint/" } }) {
+    imprint: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/imprint/" } } }
+    ) {
       edges {
         node {
           body

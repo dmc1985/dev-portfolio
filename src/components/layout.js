@@ -13,6 +13,8 @@ import Footer from "./footer"
 import CookieBar from "../components/cookieBar"
 import SplashScreen from "../components/splashScreen"
 import { useCookieBar } from "../../config"
+import { MDXProvider } from "@mdx-js/react"
+import Underlining from "../styles/underlining"
 
 // https://medium.com/@chrisfitkin/how-to-smooth-scroll-links-in-gatsby-3dc445299558
 if (typeof window !== "undefined") {
@@ -28,6 +30,8 @@ const StyledLayoutWrapper = styled.div`
   grid-template-columns: 100%;
 `
 
+const shortcodes = { Underlining }
+
 const Layout = ({ children }) => {
   const { isIntroDone } = useContext(Context).state
   // Enables dark mode if the user's OS has an active dark theme
@@ -36,19 +40,21 @@ const Layout = ({ children }) => {
 
   return (
     <StyledLayoutWrapper id="layout-wrapper" data-useCookieBar={useCookieBar}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        {isIntroDone ? (
-          <>
-            <Header />
-            <main id="main-content">{children}</main>
-            <Footer />
-          </>
-        ) : (
-          <SplashScreen />
-        )}
-        {useCookieBar && <CookieBar />}
-      </ThemeProvider>
+      <MDXProvider components={shortcodes}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          {isIntroDone ? (
+            <>
+              <Header />
+              <main id="main-content">{children}</main>
+              <Footer />
+            </>
+          ) : (
+            <SplashScreen />
+          )}
+          {useCookieBar && <CookieBar />}
+        </ThemeProvider>
+      </MDXProvider>
     </StyledLayoutWrapper>
   )
 }

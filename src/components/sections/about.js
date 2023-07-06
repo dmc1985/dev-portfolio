@@ -2,7 +2,6 @@ import React, { useRef, useContext, useEffect } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import { motion, useAnimation } from "framer-motion"
 
 import { useOnScreen } from "../../hooks/"
@@ -63,6 +62,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
 `
 
 const About = ({ content }) => {
+  // TODO: remove me
+  console.log({ content })
   const { frontmatter, body } = content[0].node
   const { isIntroDone } = useContext(Context).state
   const tControls = useAnimation()
@@ -95,7 +96,8 @@ const About = ({ content }) => {
         >
           <h3 className="section-title">{frontmatter.title}</h3>
           <div className="text-content">
-            <MDXRenderer>{body}</MDXRenderer>
+            {/*TODO: Must fix MDX*/}
+            {body}
           </div>
         </motion.div>
         <motion.div

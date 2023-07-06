@@ -12,8 +12,10 @@ import Projects from "../components/sections/projects"
 import Contact from "../components/sections/contact"
 import { seoTitleSuffix } from "../../config"
 
-const IndexPage = ({ data }) => {
+const IndexPage = ({ data, children }) => {
   const { frontmatter } = data.index.edges[0].node
+  // TODO: remove me
+  console.log({ data, children })
   const { seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
 
   const globalState = {
@@ -36,7 +38,7 @@ const IndexPage = ({ data }) => {
         />
         <Hero content={data.hero.edges} />
         <About content={data.about.edges} />
-        <Skills content={data.skills.edges} />
+        <Skills content={data.skills.edges} skills={data.allSkillsJson.nodes} />
         <Projects content={data.projects.edges} />
         <Contact content={data.contact.edges} />
       </Layout>
@@ -52,7 +54,9 @@ export default IndexPage
 
 export const pageQuery = graphql`
   {
-    index: allMdx(filter: { fileAbsolutePath: { regex: "/index/index/" } }) {
+    index: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/index/" } } }
+    ) {
       edges {
         node {
           frontmatter {
@@ -63,7 +67,9 @@ export const pageQuery = graphql`
         }
       }
     }
-    hero: allMdx(filter: { fileAbsolutePath: { regex: "/index/hero/" } }) {
+    hero: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/hero/" } } }
+    ) {
       edges {
         node {
           body
@@ -90,7 +96,9 @@ export const pageQuery = graphql`
         }
       }
     }
-    about: allMdx(filter: { fileAbsolutePath: { regex: "/index/about/" } }) {
+    about: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/about/" } } }
+    ) {
       edges {
         node {
           body
@@ -107,31 +115,33 @@ export const pageQuery = graphql`
         }
       }
     }
-    skills: allMdx(filter: { fileAbsolutePath: { regex: "/index/skills/" } }) {
+    skills: allMdx(
+      filter: { internal: { contentFilePath: { regex: "/index/skills/" } } }
+    ) {
       edges {
         node {
-          exports {
-            shownItems
-            skills {
-              name
-              icon {
-                childImageSharp {
-                  fixed(width: 20, height: 20, quality: 90) {
-                    ...GatsbyImageSharpFixed
-                  }
-                }
-              }
-            }
-          }
           frontmatter {
             title
+            shownItems
+          }
+        }
+      }
+    }
+    allSkillsJson {
+      nodes {
+        name
+        icon {
+          childImageSharp {
+            fixed(width: 20, height: 20, quality: 90) {
+              ...GatsbyImageSharpFixed
+            }
           }
         }
       }
     }
     projects: allMdx(
       filter: {
-        fileAbsolutePath: { regex: "/index/projects/" }
+        internal: { contentFilePath: { regex: "/index/projects/" } }
         frontmatter: { visible: { eq: true } }
       }
       sort: { fields: [frontmatter___position], order: ASC }
@@ -162,7 +172,7 @@ export const pageQuery = graphql`
       }
     }
     contact: allMdx(
-      filter: { fileAbsolutePath: { regex: "/index/contact/" } }
+      filter: { internal: { contentFilePath: { regex: "/index/contact/" } } }
     ) {
       edges {
         node {

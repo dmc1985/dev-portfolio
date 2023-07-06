@@ -2,7 +2,6 @@ import React, { useRef } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import Img from "gatsby-image"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import { motion } from "framer-motion"
 
 import { useOnScreen } from "../../hooks"
@@ -79,7 +78,8 @@ const Contact = ({ content }) => {
     >
       <StyledContentWrapper>
         <h3>{frontmatter.title}</h3>
-        <MDXRenderer>{body}</MDXRenderer>
+        {/*TODO: Must fix MDX*/}
+        {body}
         <div className="profile">
           <Img
             className="avatar"
