@@ -12,10 +12,8 @@ import Projects from "../components/sections/projects"
 import Contact from "../components/sections/contact"
 import { seoTitleSuffix } from "../../config"
 
-const IndexPage = ({ data, children }) => {
+const IndexPage = ({ data }) => {
   const { frontmatter } = data.index.edges[0].node
-  // TODO: remove me
-  console.log({ data, children })
   const { seoTitle, useSeoTitleSuffix, useSplashScreen } = frontmatter
 
   const globalState = {
@@ -37,7 +35,7 @@ const IndexPage = ({ data, children }) => {
           }
         />
         <Hero content={data.hero.edges} />
-        <About content={data.about.edges} />
+        <About content={data.about.edges} bioPoints={data.allAboutJson.nodes} />
         <Skills content={data.skills.edges} skills={data.allSkillsJson.nodes} />
         <Projects content={data.projects.edges} />
         <Contact content={data.contact.edges} />
@@ -48,6 +46,7 @@ const IndexPage = ({ data, children }) => {
 
 IndexPage.propTypes = {
   data: PropTypes.object.isRequired,
+  bioPoints: PropTypes.array.isRequired,
 }
 
 export default IndexPage
@@ -113,6 +112,12 @@ export const pageQuery = graphql`
             }
           }
         }
+      }
+    }
+    allAboutJson {
+      nodes {
+        type
+        info
       }
     }
     skills: allMdx(

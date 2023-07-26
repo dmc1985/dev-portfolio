@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useContext } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 import Img from "gatsby-image"
 import VisibilitySensor from "react-visibility-sensor"
 import { motion } from "framer-motion"

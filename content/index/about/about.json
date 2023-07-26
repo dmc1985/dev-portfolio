@@ -1,0 +1,12 @@
+[
+  {
+    "type": "Birthplace",
+    "info": "Brooklyn, New York 🗽"
+  },
+  { "type": "Grew up in", "info": "San Diego, CA 🌴" },
+  { "type": "Currently residing in", "info": "Paris, France 🥐" },
+  { "type": "Occupation", "info": "Full-stack web developer 💻" },
+  { "type": "Favorite food", "info": "Fish tacos 🌮" },
+  { "type": "Favorite sport", "info": "Basketball 🏀" },
+  { "type": "Favorite boardgame", "info": "Chess♟️" }
+]
