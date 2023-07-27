@@ -11,7 +11,7 @@ import { mediumRssFeed, shownArticles } from "../../../config"
 // import { rssFeed, shownArticles } from "../../../config"
 import { lightTheme, darkTheme } from "../../styles/theme"
 
-const StyledSection = motion.custom(styled.section`
+const StyledSection = motion(styled.section`
   width: 100%;
   height: auto;
   background: ${({ theme }) => theme.colors.background};

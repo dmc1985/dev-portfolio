@@ -13,7 +13,7 @@ import Navbar from "./navbar"
 import { useDarkMode, useDetectSmallScreen } from "../hooks"
 import DarkModeToggle from "react-dark-mode-toggle"
 
-const StyledHeader = motion.custom(styled.header`
+const StyledHeader = motion(styled.header`
   width: 100%;
   height: ${({ theme }) => theme.headerHeight};
   background: ${({ theme }) => theme.colors.background};

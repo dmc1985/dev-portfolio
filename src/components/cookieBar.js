@@ -7,7 +7,7 @@ import { motion, useAnimation } from "framer-motion"
 
 import Context from "../context/"
 
-const StyledCookieBar = motion.custom(styled.div`
+const StyledCookieBar = motion(styled.div`
   position: fixed;
   left: 0;
   bottom: 1rem;
