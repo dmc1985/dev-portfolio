@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react"
 import styled from "styled-components"
 import CookieConsent from "react-cookie-consent"
 import { useLocation } from "@reach/router"
-import { initializeAndTrack } from "gatsby-plugin-gdpr-cookies"
+// import { initializeAndTrack } from "gatsby-plugin-gdpr-cookies"
 import { motion, useAnimation } from "framer-motion"
 
 import Context from "../context/"
@@ -88,7 +88,7 @@ const CookieBar = () => {
         declineButtonText="Decline"
         enableDeclineButton={true}
         disableStyles={true}
-        onAccept={() => initializeAndTrack(location)}
+        onAccept={() => {}}
       >
         <p className="cookieMessage">This website uses cookies 🍪 </p>
       </CookieConsent>
