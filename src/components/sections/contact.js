@@ -59,7 +59,7 @@ const StyledContentWrapper = styled(ContentWrapper)`
 `
 
 const Contact = ({ content }) => {
-  const { body, frontmatter } = content[0].node
+  const { frontmatter } = content[0].node
 
   // Required for animation
   const ref = useRef()
@@ -78,8 +78,6 @@ const Contact = ({ content }) => {
     >
       <StyledContentWrapper>
         <h3>{frontmatter.title}</h3>
-        {/*TODO: Must fix MDX*/}
-        {body}
         <div className="profile">
           <Img
             className="avatar"

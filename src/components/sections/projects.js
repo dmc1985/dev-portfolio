@@ -288,7 +288,6 @@ const Projects = ({ content }) => {
                       {frontmatter.emoji} {frontmatter.category}
                     </div>
                     <div className="title">{frontmatter.title}</div>
-                    {/*TODO: Must fix MDX*/}
                     {body}
                     <div className="tags">
                       {frontmatter.tags.map(tag => (
