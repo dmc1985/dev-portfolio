@@ -40,21 +40,19 @@ const Layout = ({ children }) => {
 
   return (
     <StyledLayoutWrapper id="layout-wrapper" data-useCookieBar={useCookieBar}>
-      <MDXProvider components={shortcodes}>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          {isIntroDone ? (
-            <>
-              <Header />
-              <main id="main-content">{children}</main>
-              <Footer />
-            </>
-          ) : (
-            <SplashScreen />
-          )}
-          {useCookieBar && <CookieBar />}
-        </ThemeProvider>
-      </MDXProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {isIntroDone ? (
+          <>
+            <Header />
+            <main id="main-content">{children}</main>
+            <Footer />
+          </>
+        ) : (
+          <SplashScreen />
+        )}
+        {useCookieBar && <CookieBar />}
+      </ThemeProvider>
     </StyledLayoutWrapper>
   )
 }
