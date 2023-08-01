@@ -1,3 +1,5 @@
+const path = require("path")
+
 const {
   author,
   siteTitle,
@@ -8,6 +10,15 @@ const {
   googleAnalyticsTrackingId,
   colors,
 } = require(`./config`)
+
+const gatsbyRequiredRules = path.join(
+  process.cwd(),
+  "node_modules",
+  "gatsby",
+  "dist",
+  "utils",
+  "eslint-rules"
+)
 
 module.exports = {
   siteMetadata: {
@@ -75,13 +86,10 @@ module.exports = {
     {
       resolve: `gatsby-plugin-eslint`,
       options: {
-        test: /\.js$|\.jsx$/,
-        exclude: /(node_modules|.cache|public)/,
-        stages: [`develop`],
-        options: {
-          emitWarning: true,
-          failOnError: false,
-        },
+        rulePaths: [gatsbyRequiredRules],
+        exclude: ["node_modules", ".cache", "public"],
+        stages: ["develop"],
+        extensions: ["js", "jsx"],
       },
     },
   ],
