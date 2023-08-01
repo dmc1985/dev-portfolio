@@ -7,6 +7,7 @@ import { motion, useAnimation } from "framer-motion"
 import { useOnScreen } from "../../hooks/"
 import Context from "../../context/"
 import ContentWrapper from "../../styles/contentWrapper"
+import Underlining from "../../styles/underlining"
 
 const StyledSection = styled.section`
   width: 100%;
@@ -61,10 +62,8 @@ const StyledContentWrapper = styled(ContentWrapper)`
   }
 `
 
-const About = ({ content }) => {
-  // TODO: remove me
-  console.log({ content })
-  const { frontmatter, body } = content[0].node
+const About = ({ content, bioPoints }) => {
+  const { frontmatter } = content[0].node
   const { isIntroDone } = useContext(Context).state
   const tControls = useAnimation()
   const iControls = useAnimation()
@@ -96,8 +95,11 @@ const About = ({ content }) => {
         >
           <h3 className="section-title">{frontmatter.title}</h3>
           <div className="text-content">
-            {/*TODO: Must fix MDX*/}
-            {body}
+            {bioPoints.map(bioPoint => (
+              <p key={bioPoint.type}>
+                • {bioPoint.type}: <Underlining>{bioPoint.info}</Underlining>
+              </p>
+            ))}
           </div>
         </motion.div>
         <motion.div
@@ -120,10 +122,15 @@ About.propTypes = {
   content: PropTypes.arrayOf(
     PropTypes.shape({
       node: PropTypes.shape({
-        body: PropTypes.string.isRequired,
         frontmatter: PropTypes.object.isRequired,
       }).isRequired,
     }).isRequired
+  ).isRequired,
+  bioPoints: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string.isRequired,
+      info: PropTypes.string.isRequired,
+    })
   ).isRequired,
 }
 
