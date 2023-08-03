@@ -90,6 +90,8 @@ module.exports = {
         exclude: ["node_modules", ".cache", "public"],
         stages: ["develop"],
         extensions: ["js", "jsx"],
+        emitWarning: true,
+        failOnError: false,
       },
     },
   ],
