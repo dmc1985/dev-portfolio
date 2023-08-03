@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-portfolio-minimal",
-  "description": "A clean, one-page portfolio using MDX",
+  "name": "david-cohen-dev-portfolio",
+  "description": "My portfolio as a web developer",
   "version": "1.0.0",
-  "author": "Konstantin Münster <mail@konstantin.digital>",
+  "author": "David Cohen",
   "dependencies": {
     "@mdx-js/react": "^2.3.0",
     "babel-plugin-styled-components": "^1.12.0",
